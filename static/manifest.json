@@ -1,0 +1,66 @@
+{
+  "manifest_version": 3,
+  "name": "DCG Scanner Bridge",
+  "version": "0.3.0",
+  "description": "Connects the DCG admin panel to a scanner on your local network.",
+  "icons": {
+    "16": "icons/icon-16.png",
+    "32": "icons/icon-32.png",
+    "48": "icons/icon-48.png",
+    "128": "icons/icon-128.png"
+  },
+  "permissions": [
+    "scripting",
+    "activeTab"
+  ],
+  "content_security_policy": {
+    "extension_pages": "script-src 'self'"
+  },
+  "host_permissions": [
+    "http://*.local/*",
+    "https://admin.dcgstaging.co.uk/*",
+    "https://admin.dreamcargiveaways.co.uk/*"
+  ],
+  "optional_host_permissions": [
+    "https://admin-local.dcgstaging.co.uk/*"
+  ],
+  "background": {
+    "service_worker": "background.js",
+    "scripts": [
+      "background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://admin.dcgstaging.co.uk/*",
+        "https://admin.dreamcargiveaways.co.uk/*"
+      ],
+      "js": [
+        "content.js"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "action": {
+    "default_title": "DCG Scanner Bridge",
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "icons/icon-16.png",
+      "32": "icons/icon-32.png",
+      "48": "icons/icon-48.png",
+      "128": "icons/icon-128.png"
+    }
+  },
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "scanner-bridge@m10c.com",
+      "strict_min_version": "128.0",
+      "data_collection_permissions": {
+        "required": [
+          "personallyIdentifyingInfo"
+        ]
+      }
+    }
+  }
+}

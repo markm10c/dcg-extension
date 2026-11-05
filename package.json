@@ -1,0 +1,18 @@
+{
+  "name": "dcg-extension",
+  "version": "0.3.0",
+  "private": true,
+  "scripts": {
+    "build": "tsc --noEmit && rm -rf dist && cp -r static dist && esbuild src/background.ts src/content.ts src/popup.ts --bundle --outdir=dist --target=firefox128,chrome121",
+    "watch": "rm -rf dist && cp -r static dist && esbuild src/background.ts src/content.ts src/popup.ts --bundle --outdir=dist --target=firefox128,chrome121 --watch",
+    "start": "web-ext run --source-dir dist",
+    "lint": "web-ext lint --source-dir dist",
+    "package": "web-ext build --source-dir dist --overwrite-dest"
+  },
+  "devDependencies": {
+    "@types/chrome": "^0.3.7",
+    "esbuild": "^0.28.2",
+    "typescript": "^7.0.2",
+    "web-ext": "^10.8.0"
+  }
+}
